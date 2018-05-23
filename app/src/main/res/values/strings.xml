@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">zigzag_shop_login</string>
     <string name="action_settings">Settings</string>
+    <string name="login_intro_0">주문하신 상품 계정으로 로그인하시면\n배송 정보를 실시간으로 볼 수 있어요.</string>
+    <string name="login_intro_1">꽃피는 시절 비회원 주문 및 SNS 계정(페이스북/네이버 등)으로 로그인 하여 주문하신 경우, \'주문 페이지 바로가기\'를 이용해주세요.</string>
+    <string name="autologin_0">자동 로그인 약관</string>
+    <string name="autologin_1">에 동의</string>
+    <string name="login">로그인</string>
+    <string name="find_id_pwd"><![CDATA[아이디&비밀번호 찾기]]></string>
 </resources>
