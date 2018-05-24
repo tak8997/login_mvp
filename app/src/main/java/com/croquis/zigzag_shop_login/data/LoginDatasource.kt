@@ -7,6 +7,6 @@ import io.reactivex.Flowable
  * Created by Tak on 2018. 5. 24..
  */
 interface LoginDatasource {
-    fun loginUser(user: User): Flowable<Boolean>
+    fun getUser(user: User): Flowable<Boolean>
 
 }
