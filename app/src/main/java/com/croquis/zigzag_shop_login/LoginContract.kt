@@ -16,7 +16,9 @@ interface LoginContract {
 
         fun blurActivity()
         fun unblurActivity()
+
         fun showLoginStatus(loginMessage: String)
+        fun showLoginText()
 
 
     }

@@ -29,11 +29,11 @@ class LoginActivity : AppCompatActivity(), LoginContract.View, View.OnClickListe
     }
 
     override fun showProgressSpin() {
-
+        progress_spin.show()
     }
 
     override fun hideProgressSpin() {
-
+        progress_spin.hide()
     }
 
     override fun blurActivity() {
@@ -48,26 +48,14 @@ class LoginActivity : AppCompatActivity(), LoginContract.View, View.OnClickListe
 
     }
 
-    override fun onClick(view: View?) {
-        loading.visibility = View.VISIBLE
-        tv_login.visibility = View.GONE
+    override fun showLoginText() {
+        tv_login.text = "로그인"
+    }
 
+    override fun onClick(view: View?) {
         presenter.login(id = et_user_id.text, password = et_user_pwd.text)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

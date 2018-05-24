@@ -41,12 +41,14 @@ class LoginPresenter : LoginContract.Presenter {
         }
 
         if (!isValidPassword(password.toString())) {
-            view.showErrorMessage("비밀번호를 다시 입력해주세요.")
+            view.showErrorMessage("비밀번호를 4자리 이상 입력해주세요.")
             return
         }
 
         disposables.add(loginDatasource
-                .loginUser(User(id.toString(), password.toString()))
+                .getUser(User(id.toString(), password.toString()))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe {
                     view.showProgressSpin()
                     view.showLoginStatus("로그인 중입니다..")
@@ -56,12 +58,12 @@ class LoginPresenter : LoginContract.Presenter {
                     if (!it) {
                         view.showErrorMessage("아이디, 패스워드를 확인해주세요.")
                         view.unblurActivity()
+                        view.hideProgressSpin()
+                        view.showLoginText()
                         return@filter false
                     }
                     return@filter true
                 }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
                     view.showLoginStatus("로그인 성공!")
                 })
@@ -70,8 +72,8 @@ class LoginPresenter : LoginContract.Presenter {
     private fun isValidEmail(email: String?)
             = !email.isNullOrEmpty()
 
-    private fun isValidPassword(password: String?)
-            = !password.isNullOrEmpty() || password?.let { it.length > 4 } ?: false
+    private fun isValidPassword(password: String?)      //true 가 되게해야함
+            = !password.isNullOrEmpty() && password?.let { it.length > 3 } ?: false
 
     override fun login(id: Editable, password: Editable) {
         loginSubject.onNext(TempUser(id, password))
