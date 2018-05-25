@@ -7,4 +7,5 @@
     <string name="autologin_1">에 동의</string>
     <string name="login">로그인</string>
     <string name="find_id_pwd"><![CDATA[아이디&비밀번호 찾기]]></string>
+    <string name="autologin_agreement">자동 로그인 연결 약관</string>
 </resources>
