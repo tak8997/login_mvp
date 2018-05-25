@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 class LoginLocalDatasource : LoginDatasource {
 
     companion object {
-        var DUMMY_USER_DAT: List<User>
+        val DUMMY_USER_DATA: List<User>
                 = mutableListOf(
                 User("tak1111", "1111"), User("tak2222", "2222"),
                 User("tak3333", "3333"), User("tak4444", "4444"),
@@ -19,16 +19,18 @@ class LoginLocalDatasource : LoginDatasource {
                 User("tak9999", "9999"), User("tak0000", "0000"))
     }
 
+    private var isUser: Boolean? = null
 
-    override fun getUser(user: User): Flowable<Boolean> {
-        return Flowable.fromIterable(DUMMY_USER_DAT)
-                .delay(5, TimeUnit.SECONDS)
-                .map { it ->
-                    return@map it.id == user.id && it.password == user.password
-                }
+    override fun getUser(user: User): Flowable<Boolean>
+    = Flowable.just(user)
+            .delay(5000, TimeUnit.MILLISECONDS)
+            .map {
+                Flowable.fromIterable(DUMMY_USER_DATA)
+                        .filter { it.id == user.id && it.password == user.password }
+                        .subscribe { isUser = true }
+            }
+            .switchMap {
+                isUser?.let { return@switchMap Flowable.just(true) } ?: return@switchMap Flowable.just(false)
+            }
 
-
-
-
-    }
 }
