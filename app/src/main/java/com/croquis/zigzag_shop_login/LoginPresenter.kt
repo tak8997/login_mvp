@@ -79,6 +79,7 @@ class LoginPresenter : LoginContract.Presenter {
                 .observeOn(AndroidSchedulers.mainThread())
                 .filter { it ->
                     if (!it) {
+                        view.unblurActivity()
                         view.showLoginStatus(App.instance.getString(R.string.login_intro_0))
                         view.showErrorMessage("아이디, 패스워드를 확인해주세요.")
 
@@ -90,6 +91,7 @@ class LoginPresenter : LoginContract.Presenter {
                     return@filter true
                 }
                 .doOnSubscribe {
+                    view.blurActivity()
                     view.showLoginStatus("로그인 중입니다..")
                     view.showProgressSpin()
                     view.hideLoginText()
@@ -117,11 +119,9 @@ class LoginPresenter : LoginContract.Presenter {
     }
 
     override fun checkAutoLogin() {
-        Log.d("isAutoLogin111", preferencesHelper.isAutoLogin.toString())
         isAutoLogin.onNext(preferencesHelper.isAutoLogin)
     }
-
-
+    
     override fun unsubsribe() {
         disposables.clear()
     }

@@ -25,6 +25,9 @@ interface LoginContract {
 
         fun showAgreeChecked()
         fun showAgreeUnchecked()
+
+        fun blurActivity()
+        fun unblurActivity()
     }
 
 

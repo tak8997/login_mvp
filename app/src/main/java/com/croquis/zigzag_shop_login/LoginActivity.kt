@@ -8,6 +8,10 @@ import com.croquis.zigzag_shop_login.data.LoginLocalDatasource
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.toast
 
+
+
+
+
 class LoginActivity : AppCompatActivity(), LoginContract.View, View.OnClickListener {
 
     private lateinit var presenter: LoginContract.Presenter
@@ -16,7 +20,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View, View.OnClickListe
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        setSupportActionBar(toolbar)
+        initView()
 
         presenter = LoginPresenter()
         presenter.view = this
@@ -24,12 +28,25 @@ class LoginActivity : AppCompatActivity(), LoginContract.View, View.OnClickListe
         presenter.loginDatasource = LoginLocalDatasource()
         presenter.preferencesHelper = AppPreferencesHelper()
 
-        presenter.preferencesHelper.clear()
-
         presenter.checkAutoLogin()
 
         rl_login.setOnClickListener(this)
         rl_autologin_agree.setOnClickListener(this)
+    }
+
+    private fun initView() {
+        val userName = "꽃피는시절"
+        tv_toolbar.text = "로그인(" + userName + ")"
+        et_user_id.hint = userName + " 아이디"
+        setSupportActionBar(toolbar)
+    }
+
+    override fun blurActivity() {
+        body.alpha = 0.65F
+    }
+
+    override fun unblurActivity() {
+        body.alpha = 1F
     }
 
     override fun showAutoLoginLayout() {
