@@ -9,21 +9,21 @@ import com.squareup.leakcanary.LeakCanary
 
 class App : Application() {
 
-
     companion object {
         lateinit var instance: App
             private set
 
     }
 
-    init {
+    override fun onCreate() {
+        super.onCreate()
         instance = this
 
-//        initMemoryLeakDetector()
+        initMemoryLeakDetector()
     }
 
     private fun initMemoryLeakDetector() {
-        if (LeakCanary.isInAnalyzerProcess(instance))
+        if (LeakCanary.isInAnalyzerProcess(this))
             return
 
         LeakCanary.install(this)
