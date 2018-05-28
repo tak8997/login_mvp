@@ -33,6 +33,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"/>
                 <TextView
+                    android:id="@+id/tv_toolbar"
                     android:text="로그인"
                     android:textColor="#000000"
                     android:textSize="15sp"
@@ -61,22 +62,22 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:gravity="center"
+            android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:context="com.croquis.zigzag_shop_login.LoginActivity"
             tools:showIn="@layout/activity_login">
 
             <ImageView
                 android:id="@+id/img_login"
-                android:src="@drawable/img_login"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:src="@drawable/img_login"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toRightOf="parent"/>
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <android.support.v4.widget.Space
                 android:id="@+id/margin_space"
@@ -89,35 +90,35 @@
 
             <TextView
                 android:id="@+id/tv_intro_0"
-                android:text="@string/login_intro_0"
-                android:textSize="15sp"
-                android:textColor="#000000"
                 android:layout_width="280dp"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/img_login"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:gravity="center_horizontal"
-                android:layout_below="@id/img_login"
+                android:text="@string/login_intro_0"
+                android:textColor="#000000"
+                android:textSize="15sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/margin_space"/>
+                app:layout_constraintTop_toBottomOf="@+id/margin_space" />
 
             <TextView
                 android:id="@+id/tv_intro_1"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_intro_0"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:maxLines="3"
                 android:text="@string/login_intro_1"
                 android:textColor="#BDBDBD"
                 android:textSize="10sp"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:gravity="center_horizontal"
-                android:maxLines="3"
-                android:layout_marginTop="10dp"
-                android:layout_below="@+id/tv_intro_0"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_intro_0"/>
+                app:layout_constraintTop_toBottomOf="@+id/tv_intro_0" />
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/body"
@@ -126,31 +127,49 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/autologin_agree_success"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_intro_1"
-                app:layout_constraintBottom_toTopOf="@+id/autologin_agree_success"
                 app:layout_constraintVertical_bias="1.0">
+
+                <android.support.constraint.Guideline
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/guideline_0"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="5dp"/>
+
+                <android.support.constraint.Guideline
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/guideline_1"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="54dp"/>
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/user"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginLeft="8dp"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_marginTop="10dp"
                     android:src="@drawable/img_user"
-                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintLeft_toRightOf="@+id/guideline_0"
+                    app:layout_constraintRight_toLeftOf="@+id/guideline_1"
                     app:layout_constraintTop_toTopOf="parent" />
+
 
                 <EditText
                     android:id="@+id/et_user_id"
                     android:layout_width="wrap_content"
                     android:layout_height="32dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     android:background="@android:color/transparent"
                     android:hint="꽃피는시절 아이디"
                     android:inputType="textEmailAddress"
                     android:textSize="12sp"
-                    app:layout_constraintLeft_toRightOf="@+id/user"
+                    android:singleLine="true"
+                    app:layout_constraintLeft_toRightOf="@+id/guideline_1"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <View
@@ -166,25 +185,26 @@
 
                 <ImageView
                     android:id="@+id/pwd"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:src="@drawable/ic_pwd"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/separator_0" />
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintLeft_toRightOf="@+id/guideline_0"
+                    app:layout_constraintRight_toLeftOf="@+id/guideline_1"
+                    app:layout_constraintTop_toBottomOf="@+id/separator_0"
+                    app:layout_constraintBottom_toTopOf="@+id/separator_1"/>
 
                 <EditText
                     android:id="@+id/et_user_pwd"
                     android:layout_width="wrap_content"
                     android:layout_height="32dp"
-                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:background="@android:color/transparent"
                     android:hint="패스워드"
                     android:inputType="textPassword"
                     android:textSize="12sp"
-                    app:layout_constraintLeft_toRightOf="@+id/pwd"
+                    android:singleLine="true"
+                    app:layout_constraintLeft_toRightOf="@+id/guideline_1"
                     app:layout_constraintTop_toBottomOf="@+id/separator_0" />
 
                 <View
@@ -203,8 +223,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:clickable="true"
-                    android:visibility="gone"
-                    android:paddingLeft="8dp"
+                    android:paddingLeft="15dp"
                     android:paddingRight="8dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -216,18 +235,18 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_centerInParent="true"
-                        android:textSize="12sp"
                         android:text="@string/autologin_0"
-                        android:textColor="@color/colorAccent" />
+                        android:textColor="@color/colorAccent"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:textSize="12sp"
                         android:layout_toRightOf="@+id/tv_autologin_0"
                         android:text="@string/autologin_1"
-                        android:textColor="#000000" />
+                        android:textColor="#000000"
+                        android:textSize="12sp" />
 
                     <ImageView
                         android:id="@+id/img_agreement_check"
@@ -272,27 +291,28 @@
                     android:id="@+id/find_id_pwd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="20dp"
                     android:paddingBottom="20dp"
+                    android:paddingTop="20dp"
                     android:text="@string/find_id_pwd"
-                    android:textColor="#BDBDBD"
+                    android:textColor="#9E9E9E"
                     android:textSize="12sp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rl_login" />
             </android.support.constraint.ConstraintLayout>
+
             <TextView
                 android:id="@+id/autologin_agree_success"
-                android:text="@string/autologin_agreement"
-                android:textColor="#BDBDBD"
-                android:textSize="12sp"
-                android:background="#EEEEEE"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:background="#EEEEEE"
                 android:gravity="center"
+                android:text="@string/autologin_agreement"
+                android:textColor="#9E9E9E"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintRight_toRightOf="parent" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>
 
