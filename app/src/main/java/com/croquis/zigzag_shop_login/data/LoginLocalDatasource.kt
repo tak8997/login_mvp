@@ -1,17 +1,17 @@
 package com.croquis.zigzag_shop_login.data
 
+import android.os.Handler
+import android.os.Looper
 import com.croquis.zigzag_shop_login.data.model.User
-import io.reactivex.Flowable
-import java.util.concurrent.TimeUnit
 
 /**
  * Created by Tak on 2018. 5. 24..
  */
-class LoginLocalDatasource : LoginDatasource {
+internal class LoginLocalDatasource : LoginDatasource {
 
     companion object {
-        val DUMMY_USER_DATA: List<User>
-                = mutableListOf(
+        val networkLatencyInMillis = 2500L
+        val DUMMY_USER_DATA = mutableListOf(
                 User("tak1111", "1111"), User("tak2222", "2222"),
                 User("tak3333", "3333"), User("tak4444", "4444"),
                 User("tak5555", "5555"), User("tak6666", "6666"),
@@ -19,18 +19,19 @@ class LoginLocalDatasource : LoginDatasource {
                 User("tak9999", "9999"), User("tak0000", "0000"))
     }
 
-    private var isUser: Boolean? = null
+    private val handler = Handler(Looper.getMainLooper())
 
-    override fun getUser(user: User): Flowable<Boolean>
-    = Flowable.just(user)
-            .delay(5000, TimeUnit.MILLISECONDS)
-            .map {
-                Flowable.fromIterable(DUMMY_USER_DATA)
-                        .filter { it.id == user.id && it.password == user.password }
-                        .subscribe { isUser = true }
+    override fun login(user: User, callback: LoginDatasource.LoginCallback) {
+        handler.postDelayed({
+            DUMMY_USER_DATA.forEach {
+                if (it.id == user.id && it.password == user.password) {
+                    callback.onLoginAvailable(true)
+                    return@postDelayed
+                }
             }
-            .switchMap {
-                isUser?.let { return@switchMap Flowable.just(true) } ?: return@switchMap Flowable.just(false)
-            }
+
+            callback.onLoginAvailable(false)
+        }, networkLatencyInMillis)
+    }
 
 }

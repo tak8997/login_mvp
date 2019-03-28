@@ -5,7 +5,16 @@
     <string name="login_intro_1">꽃피는 시절 비회원 주문 및 SNS 계정(페이스북/네이버 등)으로 로그인 하여 주문하신 경우, \'주문 페이지 바로가기\'를 이용해주세요.</string>
     <string name="autologin_0">자동 로그인 약관</string>
     <string name="autologin_1">에 동의</string>
+    <string name="user_login">로그인(%1$s)</string>
     <string name="login">로그인</string>
     <string name="find_id_pwd"><![CDATA[아이디&비밀번호 찾기]]></string>
     <string name="autologin_agreement">자동 로그인 연결 약관</string>
+    <string name="login_success">로그인 성공!</string>
+    <string name="login_id_pwd_check">아이디, 패스워드를 확인해주세요</string>
+    <string name="id_check">아이디를 다시 입력해주세요</string>
+    <string name="pwd_check">비밀번호를 4자리 이상 입력해주세요</string>
+    <string name="terms_agree_check">자동 로그인 약관에 동의해주세요.</string>
+    <string name="logging">로그인 중입니다…</string>
+    <string name="autologin_terms_success">자동 로그인 연결 약관</string>
+    <string name="password">패스워드</string>
 </resources>

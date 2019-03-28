@@ -2,17 +2,15 @@ package com.croquis.zigzag_shop_login
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import com.croquis.zigzag_shop_login.data.AppPreferencesHelper
 import com.croquis.zigzag_shop_login.data.LoginLocalDatasource
 import kotlinx.android.synthetic.main.activity_login.*
-import org.jetbrains.anko.toast
 
 
-
-
-
-class LoginActivity : AppCompatActivity(), LoginContract.View, View.OnClickListener {
+internal class LoginActivity : AppCompatActivity(), LoginContract.View, View.OnClickListener {
 
     private lateinit var presenter: LoginContract.Presenter
 
@@ -20,97 +18,114 @@ class LoginActivity : AppCompatActivity(), LoginContract.View, View.OnClickListe
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        initView()
+        setupViews()
+        setupListeners()
 
-        presenter = LoginPresenter()
-        presenter.view = this
-
-        presenter.loginDatasource = LoginLocalDatasource()
-        presenter.preferencesHelper = AppPreferencesHelper()
-
+        presenter = LoginPresenter(LoginLocalDatasource(), AppPreferencesHelper(), this)
         presenter.checkAutoLogin()
-
-        rl_login.setOnClickListener(this)
-        rl_autologin_agree.setOnClickListener(this)
-    }
-
-    private fun initView() {
-        val userName = "꽃피는시절"
-        tv_toolbar.text = "로그인(" + userName + ")"
-        et_user_id.hint = userName + " 아이디"
-        setSupportActionBar(toolbar)
     }
 
     override fun blurActivity() {
-        body.alpha = 0.65F
+        blur_view.alpha = 0.38F
     }
 
     override fun unblurActivity() {
-        body.alpha = 1F
+        blur_view.alpha = 0.0F
     }
 
-    override fun showAutoLoginLayout() {
-        rl_autologin_agree.visibility = View.GONE
-        autologin_agree_success.visibility = View.VISIBLE
+    override fun disableUserInput() {
+        et_user_id.inputType = 0
+        et_user_pwd.inputType = 0
+        login.isEnabled = false
     }
 
-    override fun hideAutoLoginLayout() {
-        rl_autologin_agree.visibility = View.VISIBLE
-        autologin_agree_success.visibility = View.GONE
+    override fun showTermsAgreeState() {
+        group_auto_login_terms.visibility = View.GONE
+        auto_login_succeed_terms.visibility = View.VISIBLE
     }
 
+    override fun showTermsDisAgreeState() {
+        group_auto_login_terms.visibility = View.VISIBLE
+        auto_login_succeed_terms.visibility = View.GONE
+    }
 
     override fun showErrorMessage(message: String) {
-        toast(message)
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
 
     override fun showProgressSpin() {
-        progress_spin.show()
+        progress_spin.alpha = 1.0F
+        progress_spin.startAnimating()
     }
 
     override fun hideProgressSpin() {
-        progress_spin.hide()
+        progress_spin.alpha = 0.0F
+        progress_spin.stopAnimating()
     }
 
     override fun showLoginStatus(loginMessage: String) {
         tv_intro_0.text = loginMessage
-        tv_intro_1.visibility = View.GONE
+        tv_intro_1.visibility = View.INVISIBLE
     }
 
     override fun showLoginText() {
         tv_intro_1.visibility = View.VISIBLE
-        tv_login.visibility = View.VISIBLE
-        tv_login.text = "로그인"
+        login.visibility = View.VISIBLE
+        login.text = getString(R.string.login)
     }
 
     override fun hideLoginText() {
-        tv_login.visibility = View.GONE
+        login.text = ""
+    }
+
+    override fun showTermsAgreeUnchecked() {
+        img_agreement_check.isSelected = false
+        img_agreement_check.setImageResource(R.drawable.agree_unchecked_selector)
+    }
+
+    override fun showTermsAgreeChecked() {
+        img_agreement_check.isSelected = true
+        img_agreement_check.setImageResource(R.drawable.agree_check_selector)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            android.R.id.home -> true
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onClick(view: View?) {
         when (view?.id) {
-            R.id.rl_autologin_agree, R.id.img_agreement_check ->
-                presenter.checkAgreeSelected(rl_autologin_agree.isSelected)
-
-            R.id.rl_login ->
-                presenter.login(id = et_user_id.text, password = et_user_pwd.text, isAgree= rl_autologin_agree.isSelected)
+            R.id.img_agreement_check -> presenter.checkTermsAgreeSelected(img_agreement_check.isSelected)
+            R.id.login -> presenter.login(
+                    id = et_user_id.text,
+                    password = et_user_pwd.text,
+                    isAgree= img_agreement_check.isSelected)
         }
     }
 
-    override fun showAgreeUnchecked() {
-        rl_autologin_agree.isSelected = false
-        img_agreement_check.setImageResource(R.drawable.agree_unchecked_selector)
+    private fun setupListeners() {
+        login.setOnClickListener(this)
+        img_agreement_check.setOnClickListener(this)
     }
 
-    override fun showAgreeChecked() {
-        rl_autologin_agree.isSelected = true
-        img_agreement_check.setImageResource(R.drawable.agree_check_selector)
+    private fun setupViews() {
+        setSupportActionBar(toolbar)
+        supportActionBar?.run {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.ic_arrow_back)
+            setDisplayShowTitleEnabled(false)
+        }
+
+        val shopName = "꽃피는시절"
+        toolbar_title.text = String.format(getString(R.string.user_login), shopName)
+        et_user_id.hint = "$shopName 아이디"
+
+        progress_spin.alpha = 0.0F
+        progress_spin.stopAnimating()
     }
 
-    override fun onStop() {
-        super.onStop()
-        presenter.unsubsribe()
-    }
 }
 
 

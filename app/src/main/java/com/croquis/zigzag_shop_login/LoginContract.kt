@@ -1,13 +1,11 @@
 package com.croquis.zigzag_shop_login
 
 import android.text.Editable
-import com.croquis.zigzag_shop_login.data.LoginDatasource
-import com.croquis.zigzag_shop_login.data.PreferencesHelper
 
 /**
  * Created by Tak on 2018. 5. 24..
  */
-interface LoginContract {
+internal interface LoginContract {
 
     interface View {
 
@@ -20,11 +18,12 @@ interface LoginContract {
         fun showLoginText()
         fun hideLoginText()
 
-        fun showAutoLoginLayout()
-        fun hideAutoLoginLayout()
+        fun disableUserInput()
+        fun showTermsAgreeState()
+        fun showTermsDisAgreeState()
 
-        fun showAgreeChecked()
-        fun showAgreeUnchecked()
+        fun showTermsAgreeChecked()
+        fun showTermsAgreeUnchecked()
 
         fun blurActivity()
         fun unblurActivity()
@@ -33,16 +32,9 @@ interface LoginContract {
 
     interface Presenter {
 
-        var view: View
-        var loginDatasource: LoginDatasource
-        var preferencesHelper: PreferencesHelper
-
         fun login(id: Editable, password: Editable, isAgree: Boolean)
 
-        fun unsubsribe()
-
         fun checkAutoLogin()
-
-        fun checkAgreeSelected(isSelected: Boolean)
+        fun checkTermsAgreeSelected(termsAgreeSelected: Boolean)
     }
 }

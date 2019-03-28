@@ -5,7 +5,7 @@ package com.croquis.zigzag_shop_login.data
  */
 interface PreferencesHelper {
 
-    var isAutoLogin: Boolean
+    var autoLoginTermsAgreed: Boolean
 
     fun clear()
 }
