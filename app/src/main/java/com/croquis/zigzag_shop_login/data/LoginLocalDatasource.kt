@@ -10,7 +10,7 @@ import com.croquis.zigzag_shop_login.data.model.User
 internal class LoginLocalDatasource : LoginDatasource {
 
     companion object {
-        val networkLatencyInMillis = 2500L
+        const val networkLatencyInMillis = 2500L
         val DUMMY_USER_DATA = mutableListOf(
                 User("tak1111", "1111"), User("tak2222", "2222"),
                 User("tak3333", "3333"), User("tak4444", "4444"),

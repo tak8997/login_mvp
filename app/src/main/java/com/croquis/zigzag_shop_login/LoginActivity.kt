@@ -1,5 +1,6 @@
 package com.croquis.zigzag_shop_login
 
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
@@ -7,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import com.croquis.zigzag_shop_login.data.AppPreferencesHelper
 import com.croquis.zigzag_shop_login.data.LoginLocalDatasource
+import com.croquis.zigzag_shop_login.data.extension.getRoundedBitmap
 import kotlinx.android.synthetic.main.activity_login.*
 
 
@@ -34,9 +36,9 @@ internal class LoginActivity : AppCompatActivity(), LoginContract.View, View.OnC
     }
 
     override fun disableUserInput() {
-        et_user_id.inputType = 0
-        et_user_pwd.inputType = 0
-        login.isEnabled = false
+        edit_shop_id.inputType = 0
+        edit_user_pwd.inputType = 0
+        btn_login.isEnabled = false
     }
 
     override fun showTermsAgreeState() {
@@ -70,12 +72,12 @@ internal class LoginActivity : AppCompatActivity(), LoginContract.View, View.OnC
 
     override fun showLoginText() {
         tv_intro_1.visibility = View.VISIBLE
-        login.visibility = View.VISIBLE
-        login.text = getString(R.string.login)
+        btn_login.visibility = View.VISIBLE
+        btn_login.text = getString(R.string.login)
     }
 
     override fun hideLoginText() {
-        login.text = ""
+        btn_login.text = ""
     }
 
     override fun showTermsAgreeUnchecked() {
@@ -98,34 +100,48 @@ internal class LoginActivity : AppCompatActivity(), LoginContract.View, View.OnC
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.img_agreement_check -> presenter.checkTermsAgreeSelected(img_agreement_check.isSelected)
-            R.id.login -> presenter.login(
-                    id = et_user_id.text,
-                    password = et_user_pwd.text,
+            R.id.btn_login -> presenter.login(
+                    id = edit_shop_id.text,
+                    password = edit_user_pwd.text,
                     isAgree= img_agreement_check.isSelected)
         }
     }
 
     private fun setupListeners() {
-        login.setOnClickListener(this)
+        btn_login.setOnClickListener(this)
         img_agreement_check.setOnClickListener(this)
     }
 
     private fun setupViews() {
+        val shopName = "꽃피는시절"
+
+        setupToolbar(shopName)
+        setupShopInfo(shopName)
+        setupProgressStatus()
+    }
+
+    private fun setupShopInfo(shopName: String) {
+        edit_shop_id.hint = "$shopName 아이디"
+
+        val shopImageBitmap = BitmapFactory.decodeResource(resources, R.drawable.img_user)
+        val shopImageRoundedBitmap = getRoundedBitmap(shopImageBitmap)
+        user.setImageBitmap(shopImageRoundedBitmap )
+    }
+
+    private fun setupToolbar(shopName: String) {
         setSupportActionBar(toolbar)
         supportActionBar?.run {
             setDisplayHomeAsUpEnabled(true)
             setHomeAsUpIndicator(R.drawable.ic_arrow_back)
             setDisplayShowTitleEnabled(false)
         }
-
-        val shopName = "꽃피는시절"
         toolbar_title.text = String.format(getString(R.string.user_login), shopName)
-        et_user_id.hint = "$shopName 아이디"
+    }
 
+    private fun setupProgressStatus() {
         progress_spin.alpha = 0.0F
         progress_spin.stopAnimating()
     }
-
 }
 
 

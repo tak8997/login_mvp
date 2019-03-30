@@ -90,19 +90,18 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_intro_0" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView
                 android:id="@+id/user"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginBottom="12dp"
-                android:src="@drawable/img_user"
                 app:layout_constraintVertical_bias="1"
                 app:layout_constraintTop_toBottomOf="@+id/tv_intro_1"
-                app:layout_constraintLeft_toLeftOf="@id/login"
+                app:layout_constraintLeft_toLeftOf="@id/btn_login"
                 app:layout_constraintBottom_toTopOf="@+id/separator_0"/>
 
             <EditText
-                android:id="@+id/et_user_id"
+                android:id="@+id/edit_shop_id"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -111,7 +110,7 @@
                 android:singleLine="true"
                 android:layout_marginLeft="12dp"
                 app:layout_constraintLeft_toRightOf="@+id/user"
-                app:layout_constraintRight_toRightOf="@+id/login"
+                app:layout_constraintRight_toRightOf="@+id/btn_login"
                 app:layout_constraintTop_toTopOf="@+id/user"
                 app:layout_constraintBottom_toBottomOf="@+id/user"/>
 
@@ -124,8 +123,8 @@
                 android:layout_marginBottom="12dp"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
-                app:layout_constraintLeft_toLeftOf="@+id/login"
-                app:layout_constraintRight_toRightOf="@+id/login"
+                app:layout_constraintLeft_toLeftOf="@+id/btn_login"
+                app:layout_constraintRight_toRightOf="@+id/btn_login"
                 app:layout_constraintBottom_toTopOf="@+id/pwd" />
 
             <ImageView
@@ -140,7 +139,7 @@
                 app:layout_constraintRight_toRightOf="@+id/user"/>
 
             <EditText
-                android:id="@+id/et_user_pwd"
+                android:id="@+id/edit_user_pwd"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -151,8 +150,8 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="12dp"
                 app:layout_constraintLeft_toRightOf="@+id/pwd"
-                app:layout_constraintLeft_toLeftOf="@+id/et_user_id"
-                app:layout_constraintRight_toRightOf="@id/login"
+                app:layout_constraintLeft_toLeftOf="@+id/edit_shop_id"
+                app:layout_constraintRight_toRightOf="@id/btn_login"
                 app:layout_constraintTop_toTopOf="@+id/pwd"
                 app:layout_constraintBottom_toBottomOf="@+id/pwd"/>
 
@@ -165,37 +164,37 @@
                 android:background="#BDBDBD"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
-                app:layout_constraintLeft_toLeftOf="@+id/login"
-                app:layout_constraintRight_toRightOf="@+id/login"
-                app:layout_constraintBottom_toTopOf="@+id/tv_autologin_0"/>
+                app:layout_constraintLeft_toLeftOf="@+id/btn_login"
+                app:layout_constraintRight_toRightOf="@+id/btn_login"
+                app:layout_constraintBottom_toTopOf="@+id/autologin_0"/>
 
             <android.support.constraint.Group
                 android:id="@+id/group_auto_login_terms"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:constraint_referenced_ids="tv_autologin_0, tv_autologin_1, img_agreement_check"/>
+                app:constraint_referenced_ids="autologin_0, autologin_1, img_agreement_check" />
 
             <TextView
-                android:id="@+id/tv_autologin_0"
+                android:id="@+id/autologin_0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/autologin_0"
                 android:textColor="@color/colorAccent"
                 android:textSize="12sp"
                 android:layout_marginBottom="20dp"
-                app:layout_constraintLeft_toLeftOf="@id/login"
-                app:layout_constraintBottom_toTopOf="@+id/login"/>
+                app:layout_constraintLeft_toLeftOf="@id/btn_login"
+                app:layout_constraintBottom_toTopOf="@+id/btn_login"/>
 
             <TextView
-                android:id="@+id/tv_autologin_1"
+                android:id="@+id/autologin_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/autologin_1"
                 android:textColor="#000000"
                 android:textSize="12sp"
-                app:layout_constraintTop_toTopOf="@+id/tv_autologin_0"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_autologin_0"
-                app:layout_constraintLeft_toRightOf="@+id/tv_autologin_0" />
+                app:layout_constraintTop_toTopOf="@+id/autologin_0"
+                app:layout_constraintBottom_toBottomOf="@+id/autologin_0"
+                app:layout_constraintLeft_toRightOf="@+id/autologin_0" />
 
             <ImageView
                 android:id="@+id/img_agreement_check"
@@ -203,12 +202,12 @@
                 android:layout_height="32dp"
                 android:src="@drawable/agree_unchecked_selector"
                 android:clickable="true"
-                app:layout_constraintRight_toRightOf="@+id/login"
-                app:layout_constraintTop_toTopOf="@+id/tv_autologin_0"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_autologin_0"/>
+                app:layout_constraintRight_toRightOf="@+id/btn_login"
+                app:layout_constraintTop_toTopOf="@+id/autologin_0"
+                app:layout_constraintBottom_toBottomOf="@+id/autologin_0"/>
 
             <Button
-                android:id="@+id/login"
+                android:id="@+id/btn_login"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:text="@string/login"
@@ -229,7 +228,7 @@
                 android:elevation="2dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="@id/login" />
+                app:layout_constraintBottom_toBottomOf="@id/btn_login" />
 
             <TextView
                 android:id="@+id/find_id_pwd"
