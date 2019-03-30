@@ -3,7 +3,7 @@ package com.croquis.zigzag_shop_login
 import android.text.Editable
 import com.croquis.zigzag_shop_login.data.AppPreferencesHelper
 import com.croquis.zigzag_shop_login.data.LoginDatasource
-import com.croquis.zigzag_shop_login.data.model.User
+import com.croquis.zigzag_shop_login.data.model.Shop
 
 /**
  * Created by Tak on 2018. 5. 24..
@@ -30,7 +30,7 @@ internal class LoginPresenter(private val loginDataSource: LoginDatasource,
         loginView.showProgressSpin()
         loginView.hideLoginText()
 
-        loginDataSource.login(User(id.toString(), password.toString()), object : LoginDatasource.LoginCallback {
+        loginDataSource.login(Shop(id.toString(), password.toString()), object : LoginDatasource.LoginCallback {
             override fun onLoginAvailable(loginAvailable: Boolean) {
                 if (loginAvailable) {
                     preferencesHelper.autoLoginTermsAgreed = true
@@ -79,7 +79,7 @@ internal class LoginPresenter(private val loginDataSource: LoginDatasource,
 
     private fun isValidEmail(email: String?) = !email.isNullOrEmpty()
 
-    private fun isValidPassword(password: String?) = !password.isNullOrEmpty() && password.let { it.length > 3 }
+    private fun isValidPassword(password: String?) = !password.isNullOrEmpty() && password.length > 3
 
 }
 

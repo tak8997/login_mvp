@@ -5,4 +5,4 @@ package com.croquis.zigzag_shop_login.data.model
  */
 
 
-data class User(val id: String, val password: String)
+data class Shop(val id: String, val password: String)

@@ -91,7 +91,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/tv_intro_0" />
 
             <ImageView
-                android:id="@+id/user"
+                android:id="@+id/shop"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginBottom="12dp"
@@ -109,10 +109,10 @@
                 android:textSize="12sp"
                 android:singleLine="true"
                 android:layout_marginLeft="12dp"
-                app:layout_constraintLeft_toRightOf="@+id/user"
+                app:layout_constraintLeft_toRightOf="@+id/shop"
                 app:layout_constraintRight_toRightOf="@+id/btn_login"
-                app:layout_constraintTop_toTopOf="@+id/user"
-                app:layout_constraintBottom_toBottomOf="@+id/user"/>
+                app:layout_constraintTop_toTopOf="@+id/shop"
+                app:layout_constraintBottom_toBottomOf="@+id/shop"/>
 
             <View
                 android:id="@+id/separator_0"
@@ -135,8 +135,8 @@
                 android:layout_marginBottom="12dp"
                 android:adjustViewBounds="true"
                 app:layout_constraintBottom_toTopOf="@+id/separator_1"
-                app:layout_constraintLeft_toLeftOf="@+id/user"
-                app:layout_constraintRight_toRightOf="@+id/user"/>
+                app:layout_constraintLeft_toLeftOf="@+id/shop"
+                app:layout_constraintRight_toRightOf="@+id/shop"/>
 
             <EditText
                 android:id="@+id/edit_user_pwd"
@@ -252,7 +252,7 @@
                 android:alpha="0.0"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/user"/>
+                app:layout_constraintTop_toTopOf="@+id/shop"/>
 
             <TextView
                 android:id="@+id/auto_login_succeed_terms"

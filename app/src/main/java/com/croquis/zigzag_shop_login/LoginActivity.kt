@@ -125,7 +125,7 @@ internal class LoginActivity : AppCompatActivity(), LoginContract.View, View.OnC
 
         val shopImageBitmap = BitmapFactory.decodeResource(resources, R.drawable.img_user)
         val shopImageRoundedBitmap = getRoundedBitmap(shopImageBitmap)
-        user.setImageBitmap(shopImageRoundedBitmap )
+        shop.setImageBitmap(shopImageRoundedBitmap)
     }
 
     private fun setupToolbar(shopName: String) {
