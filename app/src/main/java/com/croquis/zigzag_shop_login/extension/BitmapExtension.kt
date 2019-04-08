@@ -1,4 +1,4 @@
-package com.croquis.zigzag_shop_login.data.extension
+package com.croquis.zigzag_shop_login.extension
 
 import android.graphics.*
 

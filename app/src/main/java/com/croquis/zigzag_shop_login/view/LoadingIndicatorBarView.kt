@@ -1,4 +1,4 @@
-package com.croquis.zigzag_shop_login.data.view
+package com.croquis.zigzag_shop_login.view
 
 import android.content.Context
 import android.graphics.Color
