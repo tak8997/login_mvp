@@ -7,13 +7,14 @@
     android:layout_height="match_parent"
     tools:context="com.croquis.zigzag_shop_login.LoginActivity">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/AppTheme.AppBarOverlay"
+        android:elevation="2dp"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
         <TextView
@@ -23,7 +24,7 @@
             android:layout_gravity="center"
             android:textColor="@color/_000000"
             android:textSize="16sp"/>
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
     <View
         android:background="#d3d3d3"
@@ -39,7 +40,7 @@
         android:layout_below="@+id/toolbar"
         app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -50,19 +51,13 @@
                 android:id="@+id/img_login"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
+                android:layout_marginBottom="35dp"
                 app:srcCompat="@drawable/img_login"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <android.support.v4.widget.Space
-                android:id="@+id/margin_space"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginBottom="22dp"
-                app:layout_constraintBottom_toBottomOf="@+id/img_login"
-                app:layout_constraintLeft_toLeftOf="@id/img_login"
-                app:layout_constraintRight_toRightOf="@id/img_login" />
+                app:layout_constraintBottom_toTopOf="@+id/tv_intro_0"/>
 
             <TextView
                 android:id="@+id/tv_intro_0"
@@ -72,9 +67,10 @@
                 android:text="@string/login_intro_0"
                 android:textColor="@color/_000000"
                 android:textSize="15sp"
+                android:layout_marginBottom="10dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/margin_space" />
+                app:layout_constraintBottom_toTopOf="@+id/tv_intro_1"/>
 
             <TextView
                 android:id="@+id/tv_intro_1"
@@ -85,15 +81,17 @@
                 android:maxLines="3"
                 android:text="@string/login_intro_1"
                 android:textColor="#BDBDBD"
-                android:textSize="10sp"
+                android:textSize="12sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_intro_0" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <ImageView
                 android:id="@+id/shop"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginBottom="12dp"
                 app:layout_constraintVertical_bias="1"
                 app:layout_constraintTop_toBottomOf="@+id/tv_intro_1"
@@ -133,7 +131,6 @@
                 android:layout_height="20dp"
                 android:src="@drawable/ic_pwd"
                 android:layout_marginBottom="12dp"
-                android:adjustViewBounds="true"
                 app:layout_constraintBottom_toTopOf="@+id/separator_1"
                 app:layout_constraintLeft_toLeftOf="@+id/shop"
                 app:layout_constraintRight_toRightOf="@+id/shop"/>
@@ -168,7 +165,7 @@
                 app:layout_constraintRight_toRightOf="@+id/btn_login"
                 app:layout_constraintBottom_toTopOf="@+id/autologin_0"/>
 
-            <android.support.constraint.Group
+            <androidx.constraintlayout.widget.Group
                 android:id="@+id/group_auto_login_terms"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -215,17 +212,18 @@
                 android:textStyle="bold"
                 android:background="@color/colorAccent"
                 android:gravity="center"
+                android:elevation="2dp"
                 android:layout_marginLeft="12dp"
                 android:layout_marginRight="12dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/find_id_pwd"/>
 
-            <com.croquis.zigzag_shop_login.data.view.LoadingIndicatorView
+            <com.croquis.zigzag_shop_login.view.LoadingIndicatorView
                 android:id="@+id/progress_spin"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:elevation="2dp"
+                android:elevation="4dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toBottomOf="@id/btn_login" />
@@ -267,6 +265,6 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </RelativeLayout>

@@ -2,19 +2,19 @@ package com.croquis.zigzag_shop_login
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import com.croquis.zigzag_shop_login.data.AppPreferencesHelper
-import com.croquis.zigzag_shop_login.data.LoginLocalDatasource
-import com.croquis.zigzag_shop_login.data.extension.getRoundedBitmap
+import androidx.appcompat.app.AppCompatActivity
+import com.croquis.zigzag_shop_login.extension.getRoundedBitmap
 import kotlinx.android.synthetic.main.activity_login.*
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 
 internal class LoginActivity : AppCompatActivity(), LoginContract.View, View.OnClickListener {
 
-    private lateinit var presenter: LoginContract.Presenter
+    private val presenter: LoginContract.Presenter by inject { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +23,6 @@ internal class LoginActivity : AppCompatActivity(), LoginContract.View, View.OnC
         setupViews()
         setupListeners()
 
-        presenter = LoginPresenter(LoginLocalDatasource(), AppPreferencesHelper(), this)
         presenter.checkAutoLogin()
     }
 

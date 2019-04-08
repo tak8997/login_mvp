@@ -1,15 +1,15 @@
 package com.croquis.zigzag_shop_login
 
 import android.text.Editable
-import com.croquis.zigzag_shop_login.data.AppPreferencesHelper
 import com.croquis.zigzag_shop_login.data.LoginDatasource
+import com.croquis.zigzag_shop_login.data.PreferencesHelper
 import com.croquis.zigzag_shop_login.data.model.Shop
 
 /**
  * Created by Tak on 2018. 5. 24..
  */
 internal class LoginPresenter(private val loginDataSource: LoginDatasource,
-                              private val preferencesHelper: AppPreferencesHelper,
+                              private val preferencesHelper: PreferencesHelper,
                               private val loginView: LoginContract.View) : LoginContract.Presenter {
 
     override fun checkTermsAgreeSelected(termsAgreeSelected: Boolean) {
